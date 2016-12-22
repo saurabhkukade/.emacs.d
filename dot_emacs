@@ -11,8 +11,7 @@
 (package-initialize)
 
 (electric-pair-mode)
-(setq linum-format "%4d  |")
-
+(setq linum-format "%4d \u2502 ")
 (global-linum-mode t)
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -102,17 +101,26 @@
  '(custom-enabled-themes (quote (wheatgrass)))
  '(custom-safe-themes
    (quote
-    ("5cd0afd0ca01648e1fff95a7a7f8abec925bd654915153fb39ee8e72a8b56a1f" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" default))))
+    ("3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "fad38808e844f1423c68a1888db75adf6586390f5295a03823fa1f4959046f81" "9b402e9e8f62024b2e7f516465b63a4927028a7055392290600b776e4a5b9905" "5cd0afd0ca01648e1fff95a7a7f8abec925bd654915153fb39ee8e72a8b56a1f" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" default)))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
  '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 
-(use-package zenburn-theme
+;; (use-package badger-theme
+;;   :ensure t
+;;   :config (load-theme 'maccarthy t))
+
+(use-package sublime-themes
   :ensure t
-  :config (load-theme 'zenburn t))
+  )
+
+(load-theme 'mccarthy t)
+
 
 (use-package flycheck
   :ensure t
@@ -132,6 +140,17 @@
   :init
   (yas-global-mode 1))
 
+(use-package magit
+  :ensure t)
 
+(setq backup-directory-alist `(("." . "~/.saves")))
+
+(require 'saveplace)
+(setq-default save-place t)
+
+(show-paren-mode t)
+(require 'erc)
+(global-set-key (kbd "M-f") 'comint-dynamic-complete-filename)
 (provide '.emacs)
 ;;; .emacs ends here
+
