@@ -1,5 +1,5 @@
 * Package Manager
-** setting up package manager
+  Setting package-archives melpa and package initialization.
 
     #+BEGIN_SRC emacs-lisp
     (require 'package)
@@ -11,19 +11,17 @@
     (unless (package-installed-p 'use-package)
 	(package-refresh-contents)
 	(package-install 'use-package))
-
     #+END_SRC
 
-
 * org-mode setup
-** Ensuring org mode.
+ Ensuring org mode.
 
     #+BEGIN_SRC emacs-lisp
     (use-package org
     :ensure t)
     #+END_SRC
 
-** Bullets instead of asterisks.
+ I want to see bullets instead of asterisks in org mode.
 
     #+BEGIN_SRC emacs-lisp
     (use-package org-bullets
@@ -32,27 +30,40 @@
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
     #+END_SRC
 
-** Down pointing arrow instead of "..." default org-mode symbol
+ Down pointing arrow instead of typical "..." default org-mode symbol at the
+ end of heading.
 
     #+BEGIN_SRC emacs-lisp
     (setq org-ellipsis "⤵")
     #+END_SRC
-   
+
+ Loading language interpreters to org-mode as org-load-languages
+
+   #+BEGIN_SRC emacs-lisp
+    (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((python . t)))
+   #+END_SRC
+
 * line numbers
-** Setting linum mode and line numbers
+ Setting linum mode for showing line numbers with
+ some fancy delimeters.
+
     #+BEGIN_SRC emacs-lisp
     (global-linum-mode t)
     (setq linum-format "%4d \u2502 ")
     #+END_SRC
 
 * auto pair bracket
-** Setting electric pair mode
+ Setting electric pair mode for aut-fill matching bracket.
+
     #+BEGIN_SRC emacs-lisp
     (electric-pair-mode)
     #+END_SRC
 
 * try package
-** Ensuring try package.
+ Try is use to just try any specific package of current session.
+ It does not install any package for future sessions.
 
     #+BEGIN_SRC emacs-lisp
     (use-package try
@@ -60,6 +71,7 @@
     #+END_SRC
 
 * Whick Key
+Shows all configuraion of pressed key(s).
 
     #+BEGIN_SRC emacs-lisp
     (use-package which-key
@@ -69,9 +81,13 @@
     #+END_SRC
 
 * Evil mode
-** Ensuring evil mode and making it default.
+ Haha! Thats what takes me to emacs.
+ Vi key bindings in emacs.
+ If you are vi user and shifted to emacs
+ then this for you(us).
 
     #+BEGIN_SRC emacs-lisp
+    (setq evil-want-C-i-jump nil)
     (use-package evil
     :ensure t
     :config
@@ -79,7 +95,8 @@
     #+END_SRC
 
 * Ace window
-** Ace window
+ Ace window configuration.
+ More help on https://github.com/abo-abo/ace-window
 
     #+BEGIN_SRC emacs-lisp
     (use-package ace-window
@@ -94,7 +111,7 @@
     #+END_SRC
 
 * Swipper and Counsel
-** Some fancy search conf
+ Some fancy search configurations with key-bindings.
 
     #+BEGIN_SRC emacs-lisp
     (use-package counsel
@@ -105,25 +122,25 @@
       :ensure try
       :config
       (progn
-        (ivy-mode 1)
-        (setq ivy-use-virtual-buffers t)
-        (global-set-key "\C-s" 'swiper)
-        (global-set-key (kbd "C-c C-r") 'ivy-resume)
-        (global-set-key (kbd "<f6>") 'ivy-resume)
-        (global-set-key (kbd "M-x") 'counsel-M-x)
-        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-        (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-        (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-        (global-set-key (kbd "<f1> l") 'counsel-load-library)
-        (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-        (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-        (global-set-key (kbd "C-c g") 'counsel-git)
-        (global-set-key (kbd "C-c j") 'counsel-git-grep)
-        (global-set-key (kbd "C-c k") 'counsel-ag)
-        (global-set-key (kbd "C-x l") 'counsel-locate)
-        (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-        (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-        ))
+	(ivy-mode 1)
+	(setq ivy-use-virtual-buffers t)
+	(global-set-key "\C-s" 'swiper)
+	(global-set-key (kbd "C-c C-r") 'ivy-resume)
+	(global-set-key (kbd "<f6>") 'ivy-resume)
+	(global-set-key (kbd "M-x") 'counsel-M-x)
+	(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+	(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+	(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+	(global-set-key (kbd "<f1> l") 'counsel-load-library)
+	(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+	(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+	(global-set-key (kbd "C-c g") 'counsel-git)
+	(global-set-key (kbd "C-c j") 'counsel-git-grep)
+	(global-set-key (kbd "C-c k") 'counsel-ag)
+	(global-set-key (kbd "C-x l") 'counsel-locate)
+	(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+	(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+	))
 
     (use-package avy
       :ensure t
@@ -137,7 +154,7 @@
     #+END_SRC
 
 * auto-complete
-** auto complete config
+ Auto complete config.
     #+BEGIN_SRC emacs-lisp
     (use-package auto-complete
       :ensure t
@@ -146,34 +163,39 @@
         (ac-config-default)
         (global-auto-complete-mode t)
         ))
-
     #+END_SRC
 
 * Theme config
-** Ensuring badger-thene package is installed and loaded
+ Treat all themes as safe. Avoiding prompt for yes and no.
 
     #+BEGIN_SRC emacs-lisp
-;;    (use-package badger-theme
-;;    :ensure t
-;;    :config (load-theme 'badger))
+    (setq custom-safe-themes t)
+    (load-theme 'badger)
     #+END_SRC
 
+ Ensuring badger-thene package is installed and loaded
+    #+BEGIN_SRC emacs-lisp
+    (use-package badger-theme
+    :ensure t
+    :config (load-theme 'badger))
+    #+END_SRC
 
 * flycheck jedi yasnippet
-** Some config for development work
+    Flycheck for syntax checking in emacs.
+    Jedi for python development.
+    Yasnippet for code auto-completion.
 
-#+BEGIN_SRC emacs-lisp
-(use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode t))
+    #+BEGIN_SRC emacs-lisp
+    (use-package flycheck
+    :ensure t
+    :init
+    (global-flycheck-mode t))
 
-
-(use-package jedi
-  :ensure t
-  :init
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (add-hook 'python-mode-hook 'jedi:ac-setup))
+    (use-package jedi
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (add-hook 'python-mode-hook 'jedi:ac-setup))
 
 
     (use-package yasnippet
@@ -183,26 +205,86 @@
     #+END_SRC
 
 * save place
-** Remember last in position of a file. 
+ Remember last position in a file.
+
     #+BEGIN_SRC emacs-lisp
     (require 'saveplace)
     (setq-default save-place t)
     #+END_SRC
 
 * Show parenthesis
+  Show parenthesis matching.
+
     #+BEGIN_SRC emacs-lisp
     (show-paren-mode t)
     #+END_SRC
 
 * IRC Clinet
+  ERC - emacs IRC client
+
     #+BEGIN_SRC emacs-lisp
     (require 'erc)
     #+END_SRC
 
-* Complete file Path
-** Autocompletes file path in emacs
+* Ensime
+  Scala emacs IDE
 
-    #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "M-f") 'comint-dynamic-complete-filename)
-    (provide '.emacs)
-    #+END_SRC
+  #+BEGIN_SRC emacs-lisp
+  (use-package ensime
+  :ensure t
+  :pin melpa)
+  (add-to-list 'exec-path "/usr/local/bin")
+  #+END_SRC
+* Open-file-at-cursor
+ Function to open a file at a cursor but without prompting for
+ yes or no.
+
+ #+BEGIN_SRC emacs-lisp
+    (defun xah-open-file-at-cursor ()
+    "Open the file path under cursor.
+    Using given emacs function find-file-at-point but without prompt"
+    (interactive)
+    (let ((-path (if (use-region-p)
+		    (buffer-substring-no-properties (region-beginning) (region-end))
+		    (let (p0 p1 p2)
+		    (setq p0 (point))
+		    ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+		    (skip-chars-backward "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+		    (setq p1 (point))
+		    (goto-char p0)
+		    (skip-chars-forward "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+		    (setq p2 (point))
+		    (goto-char p0)
+		    (buffer-substring-no-properties p1 p2)))))
+	(if (string-match-p "\\`https?://" -path)
+	    (browse-url -path)
+	(progn ; not starting “http://”
+	    (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" -path)
+		(progn
+		(let (
+			(-fpath (match-string 1 -path))
+			(-line-num (string-to-number (match-string 2 -path))))
+		    (if (file-exists-p -fpath)
+			(progn
+			(find-file -fpath)
+			(goto-char 1)
+			(forward-line (1- -line-num)))
+		    (progn
+			(when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fpath))
+			(find-file -fpath))))))
+	    (progn
+		(if (file-exists-p -path)
+		    (find-file -path)
+		(if (file-exists-p (concat -path ".el"))
+		    (find-file (concat -path ".el"))
+		    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -path))
+		    (find-file -path ))))))))))
+   #+END_SRC
+* My key bindings
+ Personal key bindings.
+
+ #+BEGIN_SRC emacs-lisp
+ (global-set-key (kbd "C-c a") 'org-agenda) ;;get agenda in org mode
+ (global-set-key (kbd "C-c f") 'xah-open-file-at-cursor) ;; open file under cursor
+ (global-set-key (kbd "M-f") 'comint-dynamic-complete-filename) ;; complete file-path
+ #+END_SRC
