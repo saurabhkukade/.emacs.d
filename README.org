@@ -1,0 +1,26 @@
+* dot-emacs
+ My Personal emacs configuration.
+
+* Prerequisites
+** GNU Emacs Version >= 25.1.1
+** Python 2.7.9
+   
+* Setup
+*Linux*
+Run setup.sh as superuser to set required packages.
+#+BEGIN_SRC
+sudo sh setup.sh
+#+END_SRC
+
+Run bootstrap-emacs-config.sh script to bootstrap emacs.
+Make sure that you are connected to internet while bootstrapping.
+#+BEGIN_SRC 
+sh bootstrap-emacs-config.sh
+#+END_SRC 
+
+It is going to take some time to pull packages from repository.
+Be petient! 
+
+#+BEGIN_VERSE
+Be patient and understanding. Life is too short to be vengeful or malicious. - Phillips Brooks
+#+END_VERSE
