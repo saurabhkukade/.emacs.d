@@ -12,6 +12,7 @@ Clone git repository and cd to it.
 
 #+BEGIN_SRC 
 git clone https://github.com/saurabhkukade/dot-emacs.git
+cd dot-emacs
 #+END_SRC
 
 Run setup.sh as superuser to set required packages.
