@@ -176,13 +176,21 @@ Magit - emacs git tool to manage your git repository.
 
     #+BEGIN_SRC emacs-lisp
     (setq custom-safe-themes t)
+<<<<<<< HEAD
+=======
+    (load-theme 'badger)
+>>>>>>> 10de7fc4c99927a3c5b3012fd4753a9d1fa4729e
     #+END_SRC
 
  Ensuring badger-thene package is installed and loaded
     #+BEGIN_SRC emacs-lisp
     (use-package badger-theme
     :ensure t
+<<<<<<< HEAD
     :config (load-theme 'whiteboard))
+=======
+    :config (load-theme 'badger))
+>>>>>>> 10de7fc4c99927a3c5b3012fd4753a9d1fa4729e
     #+END_SRC
 
 * flycheck jedi yasnippet
@@ -293,12 +301,13 @@ Magit - emacs git tool to manage your git repository.
  (global-set-key (kbd "C-c f") 'xah-open-file-at-cursor) ;; open file under cursor
  (global-set-key (kbd "M-f") 'comint-dynamic-complete-filename) ;; complete file-path
  #+END_SRC
+
 * Don't make backup(~) files
  #+BEGIN_SRC emacs-lisp
-    (defun make-backup-file-name (FILE)                                             
-    (let ((dirname (concat "~/.backups/emacs/"                                    
-			    (format-time-string "%y/%m/%d/"))))                    
-	(if (not (file-exists-p dirname))                                           
-	    (make-directory dirname t))                                             
+    (defun make-backup-file-name (FILE)
+    (let ((dirname (concat "~/.backups/emacs/"
+			    (format-time-string "%y/%m/%d/"))))
+	(if (not (file-exists-p dirname))
+	    (make-directory dirname t))
 	(concat dirname (file-name-nondirectory FILE))))
  #+END_SRC
