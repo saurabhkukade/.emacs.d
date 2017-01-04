@@ -2,11 +2,11 @@
  My Personal emacs configuration.
 
 * Prerequisites
-** GNU Emacs Version >= 25.1.1
-** Python 2.7.9
+ - *GNU Emacs Version >= 25.1.1*
+ - *Python 2.7.9*
    
 * Setup
-*Linux*
+** Linux
 Run setup.sh as superuser to set required packages.
 #+BEGIN_SRC
 sudo sh setup.sh
@@ -21,6 +21,4 @@ sh bootstrap-emacs-config.sh
 It is going to take some time to pull packages from repository.
 Be petient! 
 
-#+BEGIN_VERSE
 Be patient and understanding. Life is too short to be vengeful or malicious. - Phillips Brooks
-#+END_VERSE
