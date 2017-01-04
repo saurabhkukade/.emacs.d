@@ -7,6 +7,13 @@
    
 * Setup
 ** Linux
+
+Clone git repository and cd to it.
+
+#+BEGIN_SRC 
+git clone https://github.com/saurabhkukade/dot-emacs.git
+#+END_SRC
+
 Run setup.sh as superuser to set required packages.
 #+BEGIN_SRC
 sudo sh setup.sh
