@@ -176,21 +176,14 @@ Magit - emacs git tool to manage your git repository.
 
     #+BEGIN_SRC emacs-lisp
     (setq custom-safe-themes t)
-<<<<<<< HEAD
-=======
     (load-theme 'badger)
->>>>>>> 10de7fc4c99927a3c5b3012fd4753a9d1fa4729e
     #+END_SRC
 
  Ensuring badger-thene package is installed and loaded
     #+BEGIN_SRC emacs-lisp
     (use-package badger-theme
     :ensure t
-<<<<<<< HEAD
-    :config (load-theme 'whiteboard))
-=======
     :config (load-theme 'badger))
->>>>>>> 10de7fc4c99927a3c5b3012fd4753a9d1fa4729e
     #+END_SRC
 
 * flycheck jedi yasnippet
