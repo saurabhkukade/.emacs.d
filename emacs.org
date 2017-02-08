@@ -167,18 +167,20 @@
   #+END_SRC
 
 * Theme config
-  Treat all themes as safe. Avoiding prompt for yes and no.
 
-  #+BEGIN_SRC emacs-lisp
-  (setq custom-safe-themes t)
-  #+END_SRC
+ Treat all themes as safe. Avoiding prompt for yes and no.
 
-  Ensuring badger-thene package is installed and loaded
-  #+BEGIN_SRC emacs-lisp
-    (use-package monokai-theme
+    #+BEGIN_SRC emacs-lisp
+    (setq custom-safe-themes t)
+    (load-theme 'badger)
+    #+END_SRC
+
+ Ensuring badger-thene package is installed and loaded
+    #+BEGIN_SRC emacs-lisp
+    (use-package badger-theme
     :ensure t
-    :config (load-theme 'monokai))
-  #+END_SRC
+    :config (load-theme 'badger))
+    #+END_SRC
 
 * flycheck jedi yasnippet
   Flycheck for syntax checking in emacs.
