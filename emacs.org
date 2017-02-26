@@ -1,99 +1,9 @@
-* Package Manager
-  Setting package-archives melpa and package initialization.
-
-  #+BEGIN_SRC emacs-lisp
-    (require 'package)
-    (setq package-enable-at-startup nil)
-    (add-to-list 'package-archives
-            '("melpa" . "https://melpa.org/packages/"))
-    (package-initialize)
-    (setq inhibit-startup-message t) ;; get rid of startup screen
-    (unless (package-installed-p 'use-package)
-        (package-refresh-contents)
-        (package-install 'use-package))
-  #+END_SRC
-
-* org-mode setup
-  Ensuring org mode.
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package org
-    :ensure t)
-  #+END_SRC
-
-  I want to see bullets instead of asterisks in org mode.
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package org-bullets
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-  #+END_SRC
-
-  Down pointing arrow instead of typical "..." default org-mode symbol at the
-  end of heading.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq org-ellipsis "⤵")
-  #+END_SRC
-
-  Loading language interpreters to org-mode as org-load-languages
-
-  #+BEGIN_SRC emacs-lisp
-    (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((python . t)))
-  #+END_SRC
-
-* line numbers
-  Setting linum mode for showing line numbers with
-  some fancy delimeters.
-
-  #+BEGIN_SRC emacs-lisp
-    (global-linum-mode t)
-    (setq linum-format "%4d \u2502 ")
-  #+END_SRC
-
-* auto pair bracket
-  Setting electric pair mode for aut-fill matching bracket.
-
-  #+BEGIN_SRC emacs-lisp
-    (electric-pair-mode)
-  #+END_SRC
-
-* try package
-  Try is use to just try any specific package of current session.
-  It does not install any package for future sessions.
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package try
-    :ensure t)
-  #+END_SRC
-
-* Whick Key
-  Shows all configuraion of pressed key(s).
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package which-key
-    :ensure t
-    :config
-    (which-key-mode))
-  #+END_SRC
-
-* Evil mode
-  Haha! Thats what takes me to emacs.
-  Vi key bindings in emacs.
-  If you are vi user and shifted to emacs
-  then this for you(us).
-
-  #+BEGIN_SRC emacs-lisp
-    (setq evil-want-C-i-jump nil)
-    (use-package evil
-    :ensure t
-    :config
-    (evil-mode))
-  #+END_SRC
-
+* Abbrevs
+#+BEGIN_SRC emacs-lisp
+(setq-default abbrev-mode t)
+(read-abbrev-file "~/.emacs.d/abbrev_defs")
+(setq save-abbrevs t)
+#+END_SRC
 * Ace window
   Ace window configuration.
   More help on https://github.com/abo-abo/ace-window
@@ -109,49 +19,30 @@
            ((t (:inherit ace-jump-face-foreground :height 3.0)))))
         ))
   #+END_SRC
-* Magit
-
+* Agenda org
   #+BEGIN_SRC emacs-lisp
-    (use-package magit
-    :ensure t)
+ ;;(setq org-agenda-files (list "~/org"))
+ (add-to-list 'org-agenda-files "~/org/myAgenda.org")
   #+END_SRC
+* Align Regex
+#+BEGIN_SRC emacs-lisp
+(defun bjm/align-whitespace (start end)
+  "Align columns by whitespace"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)\\s-" 1 0 t))
 
-* Swipper and Counsel
-  Some fancy search configurations with key-bindings.
+(defun bjm/align-& (start end)
+  "Align columns by ampersand"
+  (interactive "r")
+  (align-regexp start end
+                "\\(\\s-*\\)&" 1 1 t))
+#+END_SRC
+* auto pair bracket
+  Setting electric pair mode for aut-fill matching bracket.
 
   #+BEGIN_SRC emacs-lisp
-    (use-package counsel
-      :ensure t
-      )
-
-    (use-package swiper
-      :ensure try
-      :config
-      (progn
-        (ivy-mode 1)
-        (setq ivy-use-virtual-buffers t)
-        (global-set-key "\C-s" 'swiper)
-        (global-set-key (kbd "C-c C-r") 'ivy-resume)
-        (global-set-key (kbd "<f6>") 'ivy-resume)
-        (global-set-key (kbd "M-x") 'counsel-M-x)
-        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-        (global-set-key (kbd "C-c g") 'counsel-git)
-        (global-set-key (kbd "C-c j") 'counsel-git-grep)
-        (global-set-key (kbd "C-c k") 'counsel-ag)
-        (global-set-key (kbd "C-x l") 'counsel-locate)
-        (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-        (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-        ))
-
-    (use-package avy
-      :ensure t
-      :bind ("M-s" . avy-goto-char))
-
-    (use-package avy
-      :ensure t
-      :config
-      (avy-setup-default))
-
+    (electric-pair-mode)
   #+END_SRC
 
 * auto-complete
@@ -166,21 +57,98 @@
         ))
   #+END_SRC
 
-* Theme config
+* Bind Key
+  #+BEGIN_SRC emacs-lisp
+    (use-package bind-key
+      :ensure t)
+    (bind-key "M-7" 'linum-mode)
+    (bind-key "M-k" ''kill-this-buffer)
+    (bind-key "M-1" 'delete-other-windows)
+    (bind-key "M-g" 'google)
+    (bind-key "C-c n" 'clean-up-buffer-or-region)
+    (bind-key "C-c s" 'swap_windows)
+    (bind-key "M-j" 'join-line-or-lines-in-region)
+    (bind-key "<M-up>" 'drag-stuff-up)
+    (bind-key "M-`" 'other-window)
+    (bind-key "<M-down>" 'drag-stuff-down)
+    (bind-key "<M-left>" 'next-buffer)
+    (bind-key "<M-right>" 'previous-buffer)
 
- Treat all themes as safe. Avoiding prompt for yes and no.
+  #+END_SRC
+# ;; * Hide Unwanted Buffers
+# #+BEGIN_SRC emacs-lisp
+# ;; Makes *scratch* empty.
+# (setq initial-scratch-message "")
 
-    #+BEGIN_SRC emacs-lisp
-    (setq custom-safe-themes t)
-    (load-theme 'badger)
-    #+END_SRC
+# ;; Removes *scratch* from buffer after the mode has been set.
+# (defun remove-scratch-buffer ()
+#   (if (get-buffer "*scratch*")
+#       (kill-buffer "*scratch*")))
+# (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
- Ensuring badger-thene package is installed and loaded
-    #+BEGIN_SRC emacs-lisp
-    (use-package badger-theme
+# ;; Removes *messages* from the buffer.
+# (setq-default message-log-max nil)
+# (kill-buffer "*Messages*")
+
+# ;; Removes *Completions* from buffer after you've opened a file.
+# (add-hook 'minibuffer-exit-hook
+#       '(lambda ()
+#          (let ((buffer "*Completions*"))
+#            (and (get-buffer buffer)
+#                 (kill-buffer buffer)))))
+
+# ;; Don't show *Buffer list* when opening multiple files at the same time.
+# (setq inhibit-startup-buffer-menu t)
+
+# ;; Show only one active window when opening multiple files at the same time.
+# (add-hook 'window-setup-hook 'delete-other-windows)
+
+# #+END_SRC
+* Cycle through buffer
+  #+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-.") 'other-window)
+  (global-set-key (kbd "C-,") 'prev-window)
+
+  (defun prev-window ()
+    (interactive)
+    (other-window -1))
+
+  #+END_SRC
+* Don't make backup(~) files
+  #+BEGIN_SRC emacs-lisp
+    (defun make-backup-file-name (FILE)
+    (let ((dirname (concat "~/.backups/emacs/"
+                            (format-time-string "%y/%m/%d/"))))
+        (if (not (file-exists-p dirname))
+            (make-directory dirname t))
+        (concat dirname (file-name-nondirectory FILE))))
+  #+END_SRC
+
+* Drag stuff
+#+BEGIN_SRC emacs-lisp
+  (use-package drag-stuff
     :ensure t
-    :config (load-theme 'badger))
-    #+END_SRC
+    :config (drag-stuff-global-mode))
+#+END_SRC
+* Electric space and operator
+  #+BEGIN_SRC emacs-lisp
+  (use-package electric-operator
+  :ensure t)
+  #+END_SRC
+
+* Evil mode
+  Haha! Thats what takes me to emacs.
+  Vi key bindings in emacs.
+  If you are vi user and shifted to emacs
+  then this for you(us).
+
+  #+BEGIN_SRC emacs-lisp
+    (setq evil-want-C-i-jump nil)
+    (use-package evil
+    :ensure t
+    :config
+    (evil-mode))
+  #+END_SRC
 
 * flycheck jedi yasnippet
   Flycheck for syntax checking in emacs.
@@ -206,20 +174,45 @@
     (yas-global-mode 1))
   #+END_SRC
 
-* save place
-  Remember last position in a file.
+* Haskell Mode
 
   #+BEGIN_SRC emacs-lisp
-  (use-package saveplace
-  :ensure t
-  :init (save-place-mode))
+  (use-package haskell-mode
+  :ensure t)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
   #+END_SRC
-
-* Show parenthesis
-  Show parenthesis matching.
-
+* Highlight-line
+#+BEGIN_SRC emacs-lisp
+  (global-hl-line-mode 1)
+  (set-face-background 'hl-line "#3e4446")
+  (set-face-foreground 'highlight nil)
+#+END_SRC
+* iedit
   #+BEGIN_SRC emacs-lisp
-    (show-paren-mode t)
+    (use-package iedit
+    :ensure t)
+
+    (defun iedit-dwim (arg)
+    "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
+    (interactive "P")
+    (if arg
+        (iedit-mode)
+        (save-excursion
+        (save-restriction
+            (widen)
+            ;; this function determines the scope of `iedit-start'.
+            (if iedit-mode
+                (iedit-done)
+            ;; `current-word' can of course be replaced by other
+            ;; functions.
+            (narrow-to-defun)
+            (iedit-start (current-word) (point-min) (point-max)))))))
+
+
+
+    (global-set-key (kbd "C-;") 'iedit-dwim)
   #+END_SRC
 
 * IRC Clinet
@@ -229,40 +222,36 @@
     (require 'erc)
   #+END_SRC
 
-* Ensime
-  Scala emacs IDE
+* line numbers
+  Setting linum mode for showing line numbers with
+  some fancy delimeters.
 
   #+BEGIN_SRC emacs-lisp
-  (use-package ensime
-  :ensure t
-  :pin melpa)
-  (add-to-list 'exec-path "/usr/local/bin")
+    (global-linum-mode t)
+    (setq linum-format "%4d \u2502 ")
   #+END_SRC
 
-* PHP Mode
+* Load custom functions
   #+BEGIN_SRC emacs-lisp
-  (use-package php-mode
-  :ensure t)
+  (load-file "~/.emacs.d/defuns.el")
+  #+END_SRC
+* Magit
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package magit
+    :ensure t)
   #+END_SRC
 
+* My key bindings
+  
+* Neo Tree
   #+BEGIN_SRC emacs-lisp
-  (use-package web-mode
-  :ensure t)
-  #+END_SRC
-
-* Haskell Mode
-
-  #+BEGIN_SRC emacs-lisp
-  (use-package haskell-mode
-  :ensure t)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-  #+END_SRC
-
-* Agenda org
-  #+BEGIN_SRC emacs-lisp
- ;;(setq org-agenda-files (list "~/org"))
- (add-to-list 'org-agenda-files "~/org/myAgenda.org")
+  (add-to-list 'load-path "/home/saurabh/.emacs.d/elpa/neotree")
+  (require 'neotree)
+  (global-set-key [f8] 'neotree-toggle)
+  (global-set-key [f7] 'neotree-enter)
+  (global-set-key [f9] 'flycheck-mode)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   #+END_SRC
 * Open-file-at-cursor
   Function to open a file at a cursor but without prompting for
@@ -309,12 +298,51 @@
                     (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -path))
                     (find-file -path ))))))))))
   #+END_SRC
-* My key bindings
+* org-mode setup
+  Ensuring org mode.
 
-* Electric space and operator
   #+BEGIN_SRC emacs-lisp
-  (use-package electric-operator
-  :ensure t)
+    (use-package org
+    :ensure t)
+  #+END_SRC
+
+  I want to see bullets instead of asterisks in org mode.
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package org-bullets
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  #+END_SRC
+
+  Down pointing arrow instead of typical "..." default org-mode symbol at the
+  end of heading.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq org-ellipsis "⤵")
+  #+END_SRC
+
+  Loading language interpreters to org-mode as org-load-languages
+
+  #+BEGIN_SRC emacs-lisp
+    (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((python . t)))
+  #+END_SRC
+
+* Package Manager
+  Setting package-archives melpa and package initialization.
+
+  #+BEGIN_SRC emacs-lisp
+    (require 'package)
+    (setq package-enable-at-startup nil)
+    (add-to-list 'package-archives
+            '("melpa" . "https://melpa.org/packages/"))
+    (package-initialize)
+    (setq inhibit-startup-message t) ;; get rid of startup screen
+    (unless (package-installed-p 'use-package)
+        (package-refresh-contents)
+        (package-install 'use-package))
   #+END_SRC
 
 * Personal key bindings.
@@ -338,15 +366,107 @@
   #+RESULTS:
   : load-emacs-org
 
-* string-inflection-all-cycle
-*  Don't make backup(~) files
+* PHP Mode
   #+BEGIN_SRC emacs-lisp
-    (defun make-backup-file-name (FILE)
-    (let ((dirname (concat "~/.backups/emacs/"
-                            (format-time-string "%y/%m/%d/"))))
-        (if (not (file-exists-p dirname))
-            (make-directory dirname t))
-        (concat dirname (file-name-nondirectory FILE))))
+  (use-package php-mode
+  :ensure t)
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+  :ensure t)
+  #+END_SRC
+
+* save place
+  Remember last position in a file.
+
+  #+BEGIN_SRC emacs-lisp
+  (use-package saveplace
+  :ensure t
+  :init (save-place-mode))
+  #+END_SRC
+
+* Scroll one line
+#+BEGIN_SRC emacs-lisp
+(setq scroll-step 1)
+#+END_SRC
+* Show parenthesis
+  Show parenthesis matching.
+
+  #+BEGIN_SRC emacs-lisp
+    (show-paren-mode t)
+  #+END_SRC
+
+* string-inflection-all-cycle
+* Swipper and Counsel
+  Some fancy search configurations with key-bindings.
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package counsel
+      :ensure t
+      )
+
+    (use-package swiper
+      :ensure try
+      :config
+      (progn
+        (ivy-mode 1)
+        (setq ivy-use-virtual-buffers t)
+        (global-set-key "\C-s" 'swiper)
+        (global-set-key (kbd "C-c C-r") 'ivy-resume)
+        (global-set-key (kbd "<f6>") 'ivy-resume)
+        (global-set-key (kbd "M-x") 'counsel-M-x)
+        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+        (global-set-key (kbd "C-c g") 'counsel-git)
+        (global-set-key (kbd "C-c j") 'counsel-git-grep)
+        (global-set-key (kbd "C-c k") 'counsel-ag)
+        (global-set-key (kbd "C-x l") 'counsel-locate)
+        (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+        (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+        ))
+
+    (use-package avy
+      :ensure t
+      :bind ("M-s" . avy-goto-char))
+
+    (use-package avy
+      :ensure t
+      :config
+      (avy-setup-default))
+
+  #+END_SRC
+
+* Theme config
+  Treat all themes as safe. Avoiding prompt for yes and no.
+
+  #+BEGIN_SRC emacs-lisp
+  (setq custom-safe-themes t)
+  #+END_SRC
+
+  Ensuring badger-thene package is installed and loaded
+  #+BEGIN_SRC emacs-lisp
+    (use-package monokai-theme
+    :ensure t
+    :config (load-theme 'monokai))
+  #+END_SRC
+
+* try package
+  Try is use to just try any specific package of current session.
+  It does not install any package for future sessions.
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package try
+    :ensure t)
+  #+END_SRC
+
+* Whick Key
+  Shows all configuraion of pressed key(s).
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
   #+END_SRC
 
 * Yes or No
@@ -354,163 +474,3 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
   #+END_SRC
 
-* iedit
-  #+BEGIN_SRC emacs-lisp
-    (use-package iedit
-    :ensure t)
-
-    (defun iedit-dwim (arg)
-    "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
-    (interactive "P")
-    (if arg
-        (iedit-mode)
-        (save-excursion
-        (save-restriction
-            (widen)
-            ;; this function determines the scope of `iedit-start'.
-            (if iedit-mode
-                (iedit-done)
-            ;; `current-word' can of course be replaced by other
-            ;; functions.
-            (narrow-to-defun)
-            (iedit-start (current-word) (point-min) (point-max)))))))
-
-
-
-    (global-set-key (kbd "C-;") 'iedit-dwim)
-  #+END_SRC
-
-* Highlight-line
-#+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode 1)
-  (set-face-background 'hl-line "#3e4446")
-  (set-face-foreground 'highlight nil)
-#+END_SRC
-* Go Mode
-  #+BEGIN_SRC emacs-lisp
-  (use-package go-mode
-  :ensure t)
-
-  (use-package exec-path-from-shell
-  :ensure t)
-  (defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-    (when window-system (set-exec-path-from-shell-PATH))
-
-    (setenv "GOPATH" "/home/saurabh/go/bin")
-    (setenv "GOROOT" "/home/saurabh/go")
-    (add-to-list 'exec-path "/home/saurabh/go/bin")
-    (defun my-go-mode-hook ()
-  ; Call Gofmt before saving
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  ; Godef jump key binding
-  (local-set-key (kbd "M-.") 'godef-jump)
-  (local-set-key (kbd "M-*") 'pop-tag-mark)
-  )
-  (add-hook 'go-mode-hook 'my-go-mode-hook)
-
-  (defun auto-complete-for-go ()
-  (auto-complete-mode 1))
-  (add-hook 'go-mode-hook 'auto-complete-for-go)
-  (with-eval-after-load 'go-mode
-   (require 'go-autocomplete))
-
-  #+END_SRC
-
-* Load custom functions
-  #+BEGIN_SRC emacs-lisp
-  (load-file "~/.emacs.d/defuns.el")
-  #+END_SRC
-* Cycle through buffer
-  #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-.") 'other-window)
-  (global-set-key (kbd "C-,") 'prev-window)
-
-  (defun prev-window ()
-    (interactive)
-    (other-window -1))
-
-  #+END_SRC
-* Scroll one line
-#+BEGIN_SRC emacs-lisp
-(setq scroll-step 1)
-#+END_SRC
-* Abbrevs
-#+BEGIN_SRC emacs-lisp
-(setq-default abbrev-mode t)
-(read-abbrev-file "~/.emacs.d/abbrev_defs")
-(setq save-abbrevs t)
-#+END_SRC
-* Drag stuff
-#+BEGIN_SRC emacs-lisp
-  (use-package drag-stuff
-    :ensure t
-    :config (drag-stuff-global-mode))
-#+END_SRC
-* Bind Key
-  #+BEGIN_SRC emacs-lisp
-    (use-package bind-key
-      :ensure t)
-    (bind-key "M-7" 'linum-mode)
-    (bind-key "M-k" ''kill-this-buffer)
-    (bind-key "M-1" 'delete-other-windows)
-    (bind-key "M-g" 'google)
-    (bind-key "C-c n" 'clean-up-buffer-or-region)
-    (bind-key "C-c s" 'swap_windows)
-    (bind-key "M-j" 'join-line-or-lines-in-region)
-    (bind-key "<M-up>" 'drag-stuff-up)
-    (bind-key "<M-down>" 'drag-stuff-down)
-    (bind-key "<M-left>" 'next-buffer)
-    (bind-key "<M-right>" 'previous-buffer)
-
-  #+END_SRC
-# ;; * Hide Unwanted Buffers
-# #+BEGIN_SRC emacs-lisp
-# ;; Makes *scratch* empty.
-# (setq initial-scratch-message "")
-
-# ;; Removes *scratch* from buffer after the mode has been set.
-# (defun remove-scratch-buffer ()
-#   (if (get-buffer "*scratch*")
-#       (kill-buffer "*scratch*")))
-# (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
-
-# ;; Removes *messages* from the buffer.
-# (setq-default message-log-max nil)
-# (kill-buffer "*Messages*")
-
-# ;; Removes *Completions* from buffer after you've opened a file.
-# (add-hook 'minibuffer-exit-hook
-#       '(lambda ()
-#          (let ((buffer "*Completions*"))
-#            (and (get-buffer buffer)
-#                 (kill-buffer buffer)))))
-
-# ;; Don't show *Buffer list* when opening multiple files at the same time.
-# (setq inhibit-startup-buffer-menu t)
-
-# ;; Show only one active window when opening multiple files at the same time.
-# (add-hook 'window-setup-hook 'delete-other-windows)
-
-# #+END_SRC
-* Align Regex
-#+BEGIN_SRC emacs-lisp
-(defun bjm/align-whitespace (start end)
-  "Align columns by whitespace"
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)\\s-" 1 0 t))
-
-(defun bjm/align-& (start end)
-  "Align columns by ampersand"
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)&" 1 1 t))
-#+END_SRC
