@@ -13,7 +13,7 @@
 Make sure that you are connected to internet while bootstrapping.
 #+BEGIN_SRC
 cd ~/
-git clone https://github.com/saurabhkukade/emacs.d.git
+git clone https://github.com/saurabhkukade/.emacs.d.git
 #+END_SRC
 
 It is going to take some time to pull and install packages from repository.
