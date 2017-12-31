@@ -1,9 +1,18 @@
-* Abbrevs
-#+BEGIN_SRC emacs-lisp
-(setq-default abbrev-mode t)
-(read-abbrev-file "~/.emacs.d/abbrev_defs")
-(setq save-abbrevs t)
-#+END_SRC
+* Package Manager
+  Setting package-archives melpa and package initialization.
+
+  #+BEGIN_SRC emacs-lisp
+    (require 'package)
+    (setq package-enable-at-startup nil)
+    (add-to-list 'package-archives
+            '("melpa" . "https://melpa.org/packages/"))
+    (package-initialize)
+    (setq inhibit-startup-message t) ;; get rid of startup screen
+    (unless (package-installed-p 'use-package)
+        (package-refresh-contents)
+        (package-install 'use-package))
+  #+END_SRC
+
 * Ace window
   Ace window configuration.
   More help on https://github.com/abo-abo/ace-window
@@ -231,10 +240,6 @@
     (setq linum-format "%4d \u2502 ")
   #+END_SRC
 
-* Load custom functions
-  #+BEGIN_SRC emacs-lisp
-  (load-file "~/.emacs.d/defuns.el")
-  #+END_SRC
 * Magit
 
   #+BEGIN_SRC emacs-lisp
@@ -244,15 +249,6 @@
 
 * My key bindings
   
-* Neo Tree
-  #+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "/home/saurabh/.emacs.d/elpa/neotree")
-  (require 'neotree)
-  (global-set-key [f8] 'neotree-toggle)
-  (global-set-key [f7] 'neotree-enter)
-  (global-set-key [f9] 'flycheck-mode)
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  #+END_SRC
 * Open-file-at-cursor
   Function to open a file at a cursor but without prompting for
   yes or no.
@@ -328,21 +324,6 @@
     (org-babel-do-load-languages
     'org-babel-load-languages
     '((python . t)))
-  #+END_SRC
-
-* Package Manager
-  Setting package-archives melpa and package initialization.
-
-  #+BEGIN_SRC emacs-lisp
-    (require 'package)
-    (setq package-enable-at-startup nil)
-    (add-to-list 'package-archives
-            '("melpa" . "https://melpa.org/packages/"))
-    (package-initialize)
-    (setq inhibit-startup-message t) ;; get rid of startup screen
-    (unless (package-installed-p 'use-package)
-        (package-refresh-contents)
-        (package-install 'use-package))
   #+END_SRC
 
 * Personal key bindings.
