@@ -1,0 +1,36 @@
+;;; -*- coding: utf-8 -*-
+(("/home/saurabh/workspace/demo_blockchain/blockchain/Main.hs" . 1036)
+ ("/home/saurabh/personal-org/"
+  (dired-filename . "/home/saurabh/personal-org/office_work.org"))
+ ("/home/saurabh/personal-org/office_work.org" . 156)
+ ("/home/saurabh/personal-org/personal.org" . 9)
+ ("/home/saurabh/.emacs.d/emacs.org" . 7801)
+ ("/home/saurabh/workspace/demo_blockchain/blockchain/demo-blockchain.cabal" . 1109)
+ ("/home/saurabh/workspace/demo_blockchain/blockchain/PeerToPeer.hs" . 8280)
+ ("/home/saurabh/workspace/demo_blockchain/blockchain/BlockChain.hs" . 4471)
+ ("/home/saurabh/workspace/demo_blockchain/"
+  (dired-filename . "/home/saurabh/workspace/demo_blockchain/blockchain"))
+ ("/home/saurabh/workspace/demo_blockchain/blockchain/"
+  (dired-filename . "/home/saurabh/workspace/demo_blockchain/blockchain/BlockChain.hs"))
+ ("/home/saurabh/personal-org/unsolved_mysteries_of_life.org" . 45)
+ ("/home/saurabh/.emacs.d/elpa/projectile-20200206.1749/projectile-autoloads.el" . 20752)
+ ("/tmp/projectile-NjDoOE/projectile-20200206.1749/projectile-autoloads.el" . 20752)
+ ("/tmp/projectile-NjDoOE/pkg-info-20150517.1143/pkg-info-autoloads.el" . 3882)
+ ("/tmp/projectile-NjDoOE/epl-20180205.2049/epl-autoloads.el" . 380)
+ ("/home/saurabh/personal-org/auto_push_script.py" . 780)
+ ("/home/saurabh/.emacs.d/elpa/leuven-theme-20200122.1934/leuven-theme-autoloads.el" . 1121)
+ ("/tmp/leuven-theme-7bun7p/leuven-theme-20200122.1934/leuven-theme-autoloads.el" . 1121)
+ ("/home/"
+  (dired-filename . "/home/saurabh"))
+ ("/home/saurabh/"
+  (dired-filename . "/home/saurabh/personal-org"))
+ ("/home/saurabh/.emacs.d/elpa/hindent-20180518.902/hindent-autoloads.el" . 1487)
+ ("/home/saurabh/.emacs.d/elpa/evil-20191120.1501/evil-autoloads.el" . 3789)
+ ("/home/saurabh/.emacs.d/elpa/goto-chg-20190110.2114/goto-chg-autoloads.el" . 1995)
+ ("/home/saurabh/.emacs.d/elpa/undo-tree-0.6.5/undo-tree-autoloads.el" . 1842)
+ ("/home/saurabh/.emacs.d/elpa/which-key-20191111.1951/which-key-autoloads.el" . 5552)
+ ("/home/saurabh/.emacs.d/elpa/monokai-theme-20190801.1701/monokai-theme-autoloads.el" . 595)
+ ("/home/saurabh/.emacs.d/elpa/try-20181204.236/try-autoloads.el" . 725)
+ ("/home/saurabh/.emacs.d/elpa/counsel-20191118.1350/counsel-autoloads.el" . 16840)
+ ("/home/saurabh/.emacs.d/elpa/swiper-20191114.1539/swiper-autoloads.el" . 1408)
+ ("/home/saurabh/.emacs.d/elpa/ivy-20191119.956/ivy-autoloads.el" . 5265))
