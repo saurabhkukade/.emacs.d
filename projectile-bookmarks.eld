@@ -1,1 +1,1 @@
-("~/workspace/demo_blockchain/blockchain/" "~/.emacs.d/" "~/personal-org/")
+("~/workspace/demo_blockchain/demo-blockchain-hs/" "~/personal-org/" "~/.emacs.d/")

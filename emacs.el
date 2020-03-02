@@ -202,12 +202,14 @@ Using given emacs function find-file-at-point but without prompt"
 (global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-c o") (lambda() (interactive)(find-file "~/personal-org/")))
 (global-set-key (kbd "C-S-p") 'yank)
+(global-set-key (kbd "C-S-p") 'yank)
 
 (use-package bind-key
     :ensure t)
+(bind-key "M-1" 'ispell-buffer)
 (bind-key "M-7" 'linum-mode)
 (bind-key "M-k" 'kill-this-buffer)
-(bind-key "M-1" 'delete-other-windows)
+(bind-key "M-w" 'delete-other-windows)
 (bind-key "M-g" 'google)
 (bind-key "C-c n" 'clean-up-buffer-or-region)
 (bind-key "C-c s" 'swap_windows)

@@ -1,17 +1,15 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/saurabh/workspace/demo_blockchain/blockchain/Main.hs" . 1036)
+(("/home/saurabh/workspace/demo_blockchain/demo-blockchain-hs/README.org" . 2445)
  ("/home/saurabh/personal-org/"
-  (dired-filename . "/home/saurabh/personal-org/office_work.org"))
- ("/home/saurabh/personal-org/office_work.org" . 156)
+  (dired-filename . "/home/saurabh/personal-org/demo-blockchain.org"))
+ ("/home/saurabh/personal-org/demo-blockchain.org" . 197)
+ ("/home/saurabh/personal-org/noted_quotes_paras.org" . 742)
+ ("/home/saurabh/.emacs.d/emacs.org" . 8786)
+ ("/home/saurabh/personal-org/office_work.org" . 32)
+ ("/home/saurabh/.emacs.d/emacs.odt" . 169)
  ("/home/saurabh/personal-org/personal.org" . 9)
- ("/home/saurabh/.emacs.d/emacs.org" . 7801)
- ("/home/saurabh/workspace/demo_blockchain/blockchain/demo-blockchain.cabal" . 1109)
- ("/home/saurabh/workspace/demo_blockchain/blockchain/PeerToPeer.hs" . 8280)
- ("/home/saurabh/workspace/demo_blockchain/blockchain/BlockChain.hs" . 4471)
  ("/home/saurabh/workspace/demo_blockchain/"
   (dired-filename . "/home/saurabh/workspace/demo_blockchain/blockchain"))
- ("/home/saurabh/workspace/demo_blockchain/blockchain/"
-  (dired-filename . "/home/saurabh/workspace/demo_blockchain/blockchain/BlockChain.hs"))
  ("/home/saurabh/personal-org/unsolved_mysteries_of_life.org" . 45)
  ("/home/saurabh/.emacs.d/elpa/projectile-20200206.1749/projectile-autoloads.el" . 20752)
  ("/tmp/projectile-NjDoOE/projectile-20200206.1749/projectile-autoloads.el" . 20752)

@@ -14,7 +14,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/personal-org/office_work.org")))
+ '(haskell-stylish-on-save t)
+ '(org-agenda-files
+   (quote
+    ("~/personal-org/demo-blockchain.org" "~/personal-org/office_work.org")))
  '(package-selected-packages
    (quote
     (leuven-theme hindent which-key monokai-theme try counsel web-mode php-mode org-bullets magit iedit haskell-mode yasnippet jedi flycheck evil electric-operator drag-stuff auto-complete ace-window use-package))))
@@ -23,4 +26,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((((class color) (min-colors 89)) (:foreground "#333333" :background "#FFFFFF"))))
  '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
