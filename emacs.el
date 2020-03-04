@@ -189,6 +189,7 @@ Using given emacs function find-file-at-point but without prompt"
         ))
 
 (defun load-emacs-org () (interactive) (find-file "~/.emacs.d/emacs.org"))
+(defun load-makefile () (interactive) (find-file "~/workspace/demo-blockchain-hs/Makefile"))
 (defun electric-modes ()
     (interactive)
     (electric-spacing-mode t)
@@ -203,6 +204,7 @@ Using given emacs function find-file-at-point but without prompt"
 (global-set-key (kbd "C-c o") (lambda() (interactive)(find-file "~/personal-org/")))
 (global-set-key (kbd "C-S-p") 'yank)
 (global-set-key (kbd "C-S-p") 'yank)
+(global-set-key (kbd "M-9") 'load-makefile)
 
 (use-package bind-key
     :ensure t)

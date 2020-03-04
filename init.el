@@ -17,7 +17,7 @@
  '(haskell-stylish-on-save t)
  '(org-agenda-files
    (quote
-    ("~/personal-org/demo-blockchain.org" "~/personal-org/office_work.org")))
+    ("~/personal-org/personal.org" "~/personal-org/demo-blockchain.org" "~/personal-org/office_work.org")))
  '(package-selected-packages
    (quote
     (leuven-theme hindent which-key monokai-theme try counsel web-mode php-mode org-bullets magit iedit haskell-mode yasnippet jedi flycheck evil electric-operator drag-stuff auto-complete ace-window use-package))))

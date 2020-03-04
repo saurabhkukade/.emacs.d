@@ -1,23 +1,21 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/saurabh/workspace/demo_blockchain/demo-blockchain-hs/README.org" . 2445)
+(("/home/saurabh/workspace/tmp/practice/randomEx.hs" . 887)
+ ("/home/saurabh/workspace/demo-blockchain-hs/src/BlockChain.hs" . 1374)
+ ("/home/saurabh/workspace/demo-blockchain-hs/src/PeerToPeer.hs" . 6100)
+ ("/home/saurabh/workspace/"
+  (dired-filename . "/home/saurabh/workspace/demo-blockchain-hs"))
+ ("/home/saurabh/workspace/demo-blockchain-hs/"
+  (dired-filename . "/home/saurabh/workspace/demo-blockchain-hs/Makefile"))
+ ("/home/saurabh/.emacs.d/emacs.org" . 3347)
  ("/home/saurabh/personal-org/"
   (dired-filename . "/home/saurabh/personal-org/demo-blockchain.org"))
- ("/home/saurabh/personal-org/demo-blockchain.org" . 197)
  ("/home/saurabh/personal-org/noted_quotes_paras.org" . 742)
- ("/home/saurabh/.emacs.d/emacs.org" . 8786)
  ("/home/saurabh/personal-org/office_work.org" . 32)
  ("/home/saurabh/.emacs.d/emacs.odt" . 169)
  ("/home/saurabh/personal-org/personal.org" . 9)
- ("/home/saurabh/workspace/demo_blockchain/"
-  (dired-filename . "/home/saurabh/workspace/demo_blockchain/blockchain"))
- ("/home/saurabh/personal-org/unsolved_mysteries_of_life.org" . 45)
  ("/home/saurabh/.emacs.d/elpa/projectile-20200206.1749/projectile-autoloads.el" . 20752)
- ("/tmp/projectile-NjDoOE/projectile-20200206.1749/projectile-autoloads.el" . 20752)
- ("/tmp/projectile-NjDoOE/pkg-info-20150517.1143/pkg-info-autoloads.el" . 3882)
- ("/tmp/projectile-NjDoOE/epl-20180205.2049/epl-autoloads.el" . 380)
  ("/home/saurabh/personal-org/auto_push_script.py" . 780)
  ("/home/saurabh/.emacs.d/elpa/leuven-theme-20200122.1934/leuven-theme-autoloads.el" . 1121)
- ("/tmp/leuven-theme-7bun7p/leuven-theme-20200122.1934/leuven-theme-autoloads.el" . 1121)
  ("/home/"
   (dired-filename . "/home/saurabh"))
  ("/home/saurabh/"
