@@ -30,7 +30,7 @@
   #+END_SRC
 * Agenda org
   #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (list "~/personal-org"))
+  (setq org-agenda-files (list "~/Dropbox/org-notebooks"))
   #+END_SRC
 * Align Regex
 #+BEGIN_SRC emacs-lisp
@@ -295,7 +295,7 @@
 (global-set-key (kbd "C-x C-g") 'electric-modes) 
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "C-c o") (lambda() (interactive)(find-file "~/personal-org/")))
+(global-set-key (kbd "C-c o") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/")))
 (global-set-key (kbd "C-S-p") 'yank)
 (global-set-key (kbd "C-S-p") 'yank)
 (global-set-key (kbd "M-9") 'load-makefile)
