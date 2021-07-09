@@ -1,30 +1,32 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
-;;; code:
 (package-initialize)
+(setq inhibit-startup-message t) ;; get rid of startup screen
+(unless (package-installed-p 'use-package)
+(package-refresh-contents)
+(package-install 'use-package))
+
+(add-to-list
+'default-frame-alist'(ns-transparent-titlebar . t))
+(add-to-list
+'default-frame-alist'(ns-appearance . light))
+
+(setq custom-safe-themes t)
+    (use-package poet-theme
+    :ensure t
+    :config (load-theme 'poet-dark))
+
+
+(setq org-agenda-files (directory-files-recursively "~/Dropbox/org-notebooks" "\\.org$"))
+
 ;; Loading all emacs config from ~/.emacs.d/emacs.org
 (org-babel-load-file  (expand-file-name "~/.emacs.d/emacs.org"))
-(provide '.emacs)
-;;; .emacs ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(haskell-stylish-on-save t)
- '(org-agenda-files
-   (quote
-    ("~/personal-org/personal.org" "~/personal-org/demo-blockchain.org" "~/personal-org/office_work.org")))
- '(package-selected-packages
-   (quote
-    (leuven-theme hindent which-key monokai-theme try counsel web-mode php-mode org-bullets magit iedit haskell-mode yasnippet jedi flycheck evil electric-operator drag-stuff auto-complete ace-window use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 89)) (:foreground "#333333" :background "#FFFFFF"))))
- '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+;;
+;;
+;;            STATIC CONFIG ENDS HERE
+;;
+;;

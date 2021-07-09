@@ -1,1 +1,0 @@
-("~/.emacs.d/" "~/personal-org/" "~/workspace/demo-blockchain-hs/")

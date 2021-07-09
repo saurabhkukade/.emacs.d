@@ -1,438 +1,669 @@
 * Ace window
-  Ace window configuration.
-  More help on https://github.com/abo-abo/ace-window
+Ace window configuration.
+More help on https://github.com/abo-abo/ace-window
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package ace-window
-      :ensure t
-      :init
-      (progn
-        (global-set-key [remap other-window] 'ace-window)
-        (custom-set-faces
-         '(aw-leading-char-face
-           ((t (:inherit ace-jump-face-foreground :height 3.0)))))
-        ))
-  #+END_SRC
-* Package Manager
-  Setting package-archives melpa and package initialization.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-    (require 'package)
-    (setq package-enable-at-startup nil)
-    (add-to-list 'package-archives
-            '("melpa" . "https://melpa.org/packages/"))
-    (package-initialize)
-    (setq inhibit-startup-message t) ;; get rid of startup screen
-    (unless (package-installed-p 'use-package)
-        (package-refresh-contents)
-        (package-install 'use-package))
-  #+END_SRC
-* Agenda org
-  #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-files (list "~/Dropbox/org-notebooks"))
-  #+END_SRC
-* Align Regex
 #+BEGIN_SRC emacs-lisp
-(defun bjm/align-whitespace (start end)
-  "Align columns by whitespace"
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)\\s-" 1 0 t))
-
-(defun bjm/align-& (start end)
-  "Align columns by ampersand"
-  (interactive "r")
-  (align-regexp start end
-                "\\(\\s-*\\)&" 1 1 t))
+(use-package ace-window
+ :ensure t
+ :init
+ (progn
+  (global-set-key [remap other-window] 'ace-window)
+  (custom-set-faces
+   '(aw-leading-char-face
+	   ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+ ))
 #+END_SRC
-* auto pair bracket
-  Setting electric pair mode for aut-fill matching bracket.
 
-  #+BEGIN_SRC emacs-lisp
-    (electric-pair-mode)
-  #+END_SRC
+* auto pair bracket
+Setting electric pair mode for aut-fill matching bracket.
+
+#+BEGIN_SRC emacs-lisp
+(electric-pair-mode)
+#+END_SRC
 
 * auto-complete
-  Auto complete config.
-  #+BEGIN_SRC emacs-lisp
-    (use-package auto-complete
-      :ensure t
-      :init
-      (progn
-        (ac-config-default)
-        (global-auto-complete-mode t)
-        ))
-  #+END_SRC
+	Auto complete config.
+#+BEGIN_SRC emacs-lisp
+	(use-package auto-complete
+	 :ensure t
+	 :init
+	 (progn
+	  (ac-config-default)
+	  (global-auto-complete-mode t)
+	 ))
+#+END_SRC
 
-* Cycle through buffer
-  #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-.") 'other-window)
-  (global-set-key (kbd "C-,") 'prev-window)
-
-  (defun prev-window ()
-    (interactive)
-    (other-window -1))
-
-  #+END_SRC
 * Don't make backup(~) files
-  #+BEGIN_SRC emacs-lisp
-    (defun make-backup-file-name (FILE)
-    (let ((dirname (concat "~/.backups/emacs/"
-                            (format-time-string "%y/%m/%d/"))))
-        (if (not (file-exists-p dirname))
-            (make-directory dirname t))
-        (concat dirname (file-name-nondirectory FILE))))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+(defun make-backup-file-name (FILE)
+ (let ((dirname (concat "~/.backups/emacs/"
+		 (format-time-string "%y/%m/%d/"))))
+  (if (not (file-exists-p dirname))
+   (make-directory dirname t))
+  (concat dirname (file-name-nondirectory FILE))))
+#+END_SRC
 
 * Drag stuff
 #+BEGIN_SRC emacs-lisp
-  (use-package drag-stuff
-    :ensure t
-    :config (drag-stuff-global-mode))
+	(use-package drag-stuff
+	 :ensure t
+	 :config (drag-stuff-global-mode))
 #+END_SRC
+
 * Electric space and operator
-  #+BEGIN_SRC emacs-lisp
-  (use-package electric-operator
-  :ensure t)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+	(use-package electric-operator
+	 :ensure t)
+#+END_SRC
 
 * Evil mode
-  Haha! Thats what takes me to emacs.
-  Vi key bindings in emacs.
-  If you are vi user and shifted to emacs
-  then this for you(us).
+	Haha! Thats what takes me to emacs.
+	Vi key bindings in emacs.
+	If you are vi user and shifted to emacs
+	then this for you(us).
 
-  #+BEGIN_SRC emacs-lisp
-    (setq evil-want-C-i-jump nil)
-    (use-package evil
-    :ensure t
-    :config
-    (evil-mode))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+(setq evil-want-C-i-jump nil)
+	(use-package evil
+	 :ensure t
+	 :config
+	 (evil-mode))
+#+END_SRC
 
 * flycheck jedi yasnippet
-  Flycheck for syntax checking in emacs.
-  Jedi for python development.
-  Yasnippet for code auto-completion.
+	Flycheck for syntax checking in emacs.
+	Jedi for python development.
+	Yasnippet for code auto-completion.
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package flycheck
-    :ensure t
-    :init
-    (global-flycheck-mode t))
+#+BEGIN_SRC emacs-lisp
+	(use-package flycheck
+	 :ensure t
+	 :init
+	 (global-flycheck-mode t))
 
-    (use-package jedi
-    :ensure t
-    :init
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (add-hook 'python-mode-hook 'jedi:ac-setup))
-
-
-    (use-package yasnippet
-    :ensure t
-    :init
-    (yas-global-mode 1))
-  #+END_SRC
+	(use-package yasnippet
+	 :ensure t
+	 :init
+	 (yas-global-mode 1))
+#+END_SRC
 
 * Haskell Mode
 
-  #+BEGIN_SRC emacs-lisp
-  (eval-after-load 'haskell 
-                    '(lambda () (local-set-key (kbd "M 1") #'haskell-mode-show-type-at)))
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-  (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-  (custom-set-variables '(haskell-stylish-on-save t))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  ;; 	    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  ;; 	    (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  ;; 	    (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+  ;; 	    (custom-set-variables '(haskell-stylish-on-save t))
+  ;; 	    (custom-set-variables '(haskell-tags-on-save t))
+  ;;   ;;	  (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
+
+  ;;     ;; When you open a file called Foo.hs, it will auto-insert
+
+  ;;     ;; -- |
+
+  ;;     ;; module Foo where
+
+  ;;     ;; And put your cursor in the comment section.
+  ;;     ;;
+  ;; 	    (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+
+
+
+  ;;     ;;; In order to use it, invoke the haskell-compile command instead of compile as you would for the ordinary Compilation mode.
+  ;;     ;;; It’s recommended to bind haskell-compile to a convenient key binding.
+  ;;     ;;; For instance, you can add the following to your Emacs initialization to bind haskell-compile to C-c C-c
+
+  ;;     (eval-after-load "haskell-mode"
+  ;; 	'(define-key haskell-mode-map (kbd "C-c h c") 'haskell-compile))
+
+  ;;     (eval-after-load "haskell-mode"
+  ;; 	'(define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring))
+
+  ;;     (eval-after-load "haskell-cabal"
+  ;; 	'(define-key haskell-cabal-mode-map (kbd "C-c h c") 'haskell-compile))
+
+  ;;     (eval-after-load "interactive-haskell-mode"
+  ;; 	'((define-key interactive-haskell-mode-map (kbd "M-.") 'haskell-mode-goto-loc)
+  ;; 	  (define-key interactive-haskell-mode-map (kbd "C-c C-t") 'haskell-mode-show-type-at)))
+
+  ;;     (eval-after-load "interactive-haskell-mode"
+  ;; 	'((define-key interactive-haskell-mode-map (kbd "M-.") 'haskell-mode-goto-loc)
+  ;; 	  (define-key interactive-haskell-mode-map (kbd "C-c C-t") 'haskell-mode-show-type-at)
+  ;; 	  (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+  ;; 	  (define-key haskell-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)))
+
+
+  ;;   ;; Whenever GHC says something is not in scope, it will hoogle that symbol.
+  ;;   ;; If there are results, it will prompt to add one of the modules from Hoogle’s results.
+  ;;   ;; You need to make sure you’ve generated your Hoogle database properly.
+  ;;    (custom-set-variables '(haskell-process-suggest-hoogle-imports t))
+
+
+
+  ;;   ;; ;;(custom-set-variables
+  ;;   ;; ;;  '(haskell-process-suggest-remove-import-lines t))
+
+
+  ;; ;; OFF evil mode
+  ;; (evil-set-initial-state 'haskell-interactive-mode 'emacs)
+
+#+END_SRC
+
 * Highlight-line
 #+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode 1)
-  (set-face-background 'hl-line "#3e4446")
-  (set-face-foreground 'highlight nil)
+(global-hl-line-mode 1)
+	(set-face-background 'hl-line "#3e4446")
+	(set-face-foreground 'highlight nil)
 #+END_SRC
-* iedit
-  #+BEGIN_SRC emacs-lisp
-    (use-package iedit
-    :ensure t)
-
-    (defun iedit-dwim (arg)
-    "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
-    (interactive "P")
-    (if arg
-        (iedit-mode)
-        (save-excursion
-        (save-restriction
-            (widen)
-            ;; this function determines the scope of `iedit-start'.
-            (if iedit-mode
-                (iedit-done)
-            ;; `current-word' can of course be replaced by other
-            ;; functions.
-            (narrow-to-defun)
-            (iedit-start (current-word) (point-min) (point-max)))))))
-
-
-
-    (global-set-key (kbd "C-;") 'iedit-dwim)
-  #+END_SRC
 
 * IRC Clinet
-  ERC - emacs IRC client
+	ERC - emacs IRC client
 
-  #+BEGIN_SRC emacs-lisp
-    (require 'erc)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+	(require 'erc)
+#+END_SRC
 
-* line numbers
-  Setting linum mode for showing line numbers with
-  some fancy delimeters.
+	* line numbers
+	Setting linum mode for showing line numbers with
+	some fancy delimeters.
 
-  #+BEGIN_SRC emacs-lisp
-    (global-linum-mode t)
-    (setq linum-format "%2d \u2502")
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+
+(global-display-line-numbers-mode)
+(setq linum-format "%3d" )
+#+END_SRC
 
 * Magit
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package magit
-    :ensure t)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+	(use-package magit
+	 :ensure t)
+#+END_SRC
 
 * Open-file-at-cursor
-  Function to open a file at a cursor but without prompting for
-  yes or no.
+	Function to open a file at a cursor but without prompting for
+	yes or no.
 
-  #+BEGIN_SRC emacs-lisp
-    (defun xah-open-file-at-cursor ()
-    "Open the file path under cursor.
-    Using given emacs function find-file-at-point but without prompt"
-    (interactive)
-    (let ((-path (if (use-region-p)
-                    (buffer-substring-no-properties (region-beginning) (region-end))
-                    (let (p0 p1 p2)
-                    (setq p0 (point))
-                    ;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
-                    (skip-chars-backward "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
-                    (setq p1 (point))
-                    (goto-char p0)
-                    (skip-chars-forward "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
-                    (setq p2 (point))
-                    (goto-char p0)
-                    (buffer-substring-no-properties p1 p2)))))
-        (if (string-match-p "\\`https?://" -path)
-            (browse-url -path)
-        (progn ; not starting “http://”
-            (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" -path)
-                (progn
-                (let (
-                        (-fpath (match-string 1 -path))
-                        (-line-num (string-to-number (match-string 2 -path))))
-                    (if (file-exists-p -fpath)
-                        (progn
-                        (find-file -fpath)
-                        (goto-char 1)
-                        (forward-line (1- -line-num)))
-                    (progn
-                        (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fpath))
-                        (find-file -fpath))))))
-            (progn
-                (if (file-exists-p -path)
-                    (find-file -path)
-                (if (file-exists-p (concat -path ".el"))
-                    (find-file (concat -path ".el"))
-                    (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -path))
-                    (find-file -path ))))))))))
-  #+END_SRC
-* org-mode setup
-  Ensuring org mode.
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package org
-    :ensure t)
-  #+END_SRC
-
-  I want to see bullets instead of asterisks in org mode.
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package org-bullets
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-  #+END_SRC
-
-  Loading language interpreters to org-mode as org-load-languages
-
-  #+BEGIN_SRC emacs-lisp
-    (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((python . t)))
-  #+END_SRC
-  
 #+BEGIN_SRC emacs-lisp
-(setq org-todo-keyword-faces
-      '(
-        ("WORKING" . (:foreground "blue" :weight bold))
-        ("IF-TIME" . (:foreground "yellow" :weight bold))
-        ("NOT-REPRO" . (:foreground "purple" :weight bold))
-        ))
+(defun xah-open-file-at-cursor ()
+ "Open the file path under cursor.
+ Using given emacs function find-file-at-point but without prompt"
+ (interactive)
+ (let ((-path (if (use-region-p)
+	       (buffer-substring-no-properties (region-beginning) (region-end))
+	       (let (p0 p1 p2)
+		(setq p0 (point))
+		;; chars that are likely to be delimiters of full path, e.g. space, tabs, brakets.
+		(skip-chars-backward "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\`")
+		(setq p1 (point))
+		(goto-char p0)
+		(skip-chars-forward "^  \"\t\n`'|()[]{}<>〔〕“”〈〉《》【】〖〗«»‹›·。\\'")
+		(setq p2 (point))
+		(goto-char p0)
+		(buffer-substring-no-properties p1 p2)))))
+  (if (string-match-p "\\`https?://" -path)
+   (browse-url -path)
+   (progn ; not starting “http://”
+    (if (string-match "^\\`\\(.+?\\):\\([0-9]+\\)\\'" -path)
+     (progn
+      (let (
+	    (-fpath (match-string 1 -path))
+	    (-line-num (string-to-number (match-string 2 -path))))
+       (if (file-exists-p -fpath)
+	(progn
+	 (find-file -fpath)
+	 (goto-char 1)
+	 (forward-line (1- -line-num)))
+	(progn
+	 (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -fpath))
+	  (find-file -fpath))))))
+     (progn
+      (if (file-exists-p -path)
+       (find-file -path)
+       (if (file-exists-p (concat -path ".el"))
+	(find-file (concat -path ".el"))
+	(when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" -path))
+	 (find-file -path ))))))))))
+#+END_SRC
+
+* org-mode setup
+	Ensuring org mode.
+
+#+BEGIN_SRC emacs-lisp
+	(use-package org
+	 :ensure t)
+#+END_SRC
+
+	I want to see bullets instead of asterisks in org mode.
+
+#+BEGIN_SRC emacs-lisp
+	(use-package org-bullets
+	 :ensure t
+	 :config
+	 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+	Loading language interpreters to org-mode as org-load-languages
+
+#+BEGIN_SRC emacs-lisp
+	(org-babel-do-load-languages
+	 'org-babel-load-languages
+	 '((python . t)))
 #+END_SRC
 
 * Personal key bindings.
 #+BEGIN_SRC emacs-lisp
 
-(defun load-emacs-org () (interactive) (find-file "~/.emacs.d/emacs.org"))
-(defun load-makefile () (interactive) (find-file "~/workspace/demo-blockchain-hs/Makefile"))
-(defun electric-modes ()
-    (interactive)
-    (electric-spacing-mode t)
-    (electric-operator-mode t))
-(global-set-key (kbd "C-c a") 'org-agenda) ;;get agenda in org mode
-(global-set-key (kbd "C-c f") 'xah-open-file-at-cursor) ;; open file under cursor
-(global-set-key (kbd "M-f") 'comint-dynamic-complete-filename) ;; complete file-path
-(global-set-key (kbd "C-c C-g") 'load-emacs-org)
-(global-set-key (kbd "C-x C-g") 'electric-modes) 
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "C-c o") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/")))
-(global-set-key (kbd "C-S-p") 'yank)
-(global-set-key (kbd "C-S-p") 'yank)
-(global-set-key (kbd "M-9") 'load-makefile)
+  (defun load-emacs-org () (interactive) (find-file "~/.emacs.d/emacs.org"))
+  (defun load-makefile () (interactive) (find-file "~/workspace/demo-blockchain-hs/Makefile"))
+  (defun electric-modes ()
+   (interactive)
+   (electric-spacing-mode t)
+   (electric-operator-mode t))
 
-(use-package bind-key
-    :ensure t)
-(bind-key "M-1" 'ispell-buffer)
-(bind-key "M-7" 'linum-mode)
-(bind-key "M-k" 'kill-this-buffer)
-(bind-key "M-w" 'delete-other-windows)
-(bind-key "M-g" 'google)
-(bind-key "C-c n" 'clean-up-buffer-or-region)
-(bind-key "C-c s" 'swap_windows)
-(bind-key "M-j" 'join-line-or-lines-in-region)
-(bind-key "<M-up>" 'drag-stuff-up)
-(bind-key "M-`" 'other-window)
-(bind-key "<M-down>" 'drag-stuff-down)
-(bind-key "<M-left>" 'next-buffer)
-(bind-key "<M-right>" 'previous-buffer)
+  (global-set-key (kbd "<f12>") 'evil-local-mode)
+  (global-set-key (kbd "C-c f") 'xah-open-file-at-cursor) ;; open file under cursor
+  (global-set-key (kbd "M-f") 'comint-dynamic-complete-filename) ;; complete file-path
+  (global-set-key (kbd "C-c C-g") 'load-emacs-org)
+  (global-set-key (kbd "C-x C-g") 'electric-modes)
+  (global-set-key (kbd "C-+") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+  (global-set-key (kbd " C-c /") 'helm-find)
+
+  (global-set-key (kbd "C-c m") 'magit) ;;magit
+  (global-set-key (kbd "C-c a") 'org-agenda) ;;get agenda in org mode
+
+  (global-set-key (kbd "C-S-v") 'yank)
+;;  (eval-after-load 'haskell-mode (load-library "haskell-mode"))
+
+  (use-package bind-key
+   :ensure t)
+  (bind-key "M-1" 'ispell-buffer)
+  (bind-key "M-7" 'linum-mode)
+  (bind-key "M-k" 'kill-this-buffer)
+  (bind-key "M-w" 'delete-other-windows)
+  (bind-key "M-g" 'google)
+  (bind-key "M-j" 'join-line-or-lines-in-region)
+  (bind-key "<M-up>" 'drag-stuff-up)
+  (bind-key "M-`" 'other-window)
+  (bind-key "<M-down>" 'drag-stuff-down)
+  (bind-key "<M-down>" 'drag-stuff-down)
+  (bind-key "C-x w" 'kill-buffer-and-window)
+  (bind-key "M-[" 'previous-buffer)
+  (bind-key "M-]" 'next-buffer)
 
 
-  #+END_SRC
+#+END_SRC
 
 * save place
-  Remember last position in a file.
+	Remember last position in a file.
 
-  #+BEGIN_SRC emacs-lisp
-  (use-package saveplace
-  :ensure t
-  :init (save-place-mode))
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+	(use-package saveplace
+	 :ensure t
+	 :init (save-place-mode))
+#+END_SRC
 
 * Scroll one line
 #+BEGIN_SRC emacs-lisp
 (setq scroll-step 1)
 #+END_SRC
+
 * Show parenthesis
-  Show parenthesis matching.
+	Show parenthesis matching.
 
-  #+BEGIN_SRC emacs-lisp
-    (show-paren-mode t)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode t)
+#+END_SRC
 
-* Swipper and Counsel
-  Some fancy search configurations with key-bindings.
+* Avy
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package counsel
-      :ensure t
-      )
+#+BEGIN_SRC emacs-lisp
+	(use-package avy
+	 :ensure t
+	 :bind ("M-s" . avy-goto-char))
 
-    (use-package swiper
-      :ensure try
-      :config
-      (progn
-        (ivy-mode 1)
-        (setq ivy-use-virtual-buffers t)
-        (global-set-key "\C-s" 'swiper)
-        (global-set-key (kbd "C-c C-r") 'ivy-resume)
-        (global-set-key (kbd "<f6>") 'ivy-resume)
-        (global-set-key (kbd "M-x") 'counsel-M-x)
-        (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-        (global-set-key (kbd "C-c g") 'counsel-git)
-        (global-set-key (kbd "C-c j") 'counsel-git-grep)
-        (global-set-key (kbd "C-c k") 'counsel-ag)
-        (global-set-key (kbd "C-x l") 'counsel-locate)
-        (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-        (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-        ))
+	(use-package avy
+	 :ensure t
+	 :config
+	 (avy-setup-default))
 
-    (use-package avy
-      :ensure t
-      :bind ("M-s" . avy-goto-char))
-
-    (use-package avy
-      :ensure t
-      :config
-      (avy-setup-default))
-
-  #+END_SRC
+#+END_SRC
 
 * Theme config
-  Treat all themes as safe. Avoiding prompt for yes and no.
 
-  #+BEGIN_SRC emacs-lisp
-  (setq custom-safe-themes t)
-  #+END_SRC
+#+BEGIN_SRC emacs-lisp
+  ;;     (setq custom-safe-themes t)
+  ;;         (use-package darcula-theme
+  ;;         :ensure t
+  ;;         :config (load-theme 'darcula))
 
-  Ensuring badger-thene package is installed and loaded
-  #+BEGIN_SRC emacs-lisp
-    (use-package leuven-theme
-    :ensure t
-    :config (load-theme 'leuven))
-  #+END_SRC
+  ;;  (add-hook 'text-mode-hook
+  ;;	     (lambda ()
+  ;;	       (variable-pitch-mode 1)))
+
+  ;;(set-face-attribute 'default nil :family "DejaVu Sans Mono" :height 100)
+  ;; (set-face-attribute 'fixed-pitch nil :family "DejaVu Sans Mono")
+  ;;(set-face-attribute 'variable-pitch nil :family "IBM Plex Serif")
+
+    ;; (add-to-list
+    ;;   'default-frame-alist'(ns-transparent-titlebar . t))
+    ;; (add-to-list
+    ;;   'default-frame-alist'(ns-appearance . light))
+
+    ;;    (setq custom-safe-themes t)
+    ;; 	 (use-package poet-theme
+    ;; 	 :ensure t
+    ;; 	 :config (load-theme 'poet-dark))
+#+END_SRC
 
 * try package
-  Try is use to just try any specific package of current session.
-  It does not install any package for future sessions.
+	Try is use to just try any specific package of current session.
+	It does not install any package for future sessions.
 
-  #+BEGIN_SRC emacs-lisp
-    (use-package try
-    :ensure t)
-  #+END_SRC
-
-* Whick Key
-  Shows all configuraion of pressed key(s).
-
-  #+BEGIN_SRC emacs-lisp
-    (use-package which-key
-    :ensure t
-    :config
-    (which-key-mode))
-  #+END_SRC
-
-* Projectile
 #+BEGIN_SRC emacs-lisp
-(use-package projectile
-:ensure t
-:config
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+	(use-package try
+	 :ensure t)
 #+END_SRC
 
 * Yes or No
 #+BEGIN_SRC emacs-lisp
-(defalias 'yes-or-no-p 'y-or-n-p)
+	(defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
 * Font
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'default-frame-alist
-             '(font . "Fantasque Sans Mono-11"))
-
-(set-frame-font "Fantasque Sans Mono-11" nil t)
+  ;; (set-frame-font "FiraCode 11")
+   (set-frame-font "Inconsolata 14" nil t)
+  ;; (set-frame-font "Fantasque Sans Mono-11" nil t)
 #+END_SRC
+
 * Tool Bar Hide
 #+BEGIN_SRC emacs-lisp
 (tool-bar-mode -1)
+#+END_SRC
+* Time in the modeline
+
+I like having the clock.
+
+#+begin_src emacs-lisp
+(display-time-mode 1)
+#+end_src
+
+* History
+
+From http://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html:
+#+BEGIN_SRC emacs-lisp
+
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+        regexp-search-ring))
+
+#+END_SRC
+
+* Helm - interactive completion
+
+Helm makes it easy to complete various things. I find it to be easier
+to configure than ido in order to get completion in as many places as
+possible, although I prefer ido's way of switching buffers.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package helm
+    :diminish helm-mode
+    :init
+    (progn
+      (require 'helm-config)
+      (setq helm-candidate-number-limit 100)
+      ;; From https://gist.github.com/antifuchs/9238468
+      (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+	    helm-input-idle-delay 0.01  ; this actually updates things
+					  ; reeeelatively quickly.
+	    helm-yas-display-key-on-candidate t
+	    helm-quick-update t
+	    helm-M-x-requires-pattern nil
+	    helm-ff-skip-boring-files t)
+      (helm-mode))
+    :bind (("C-c h" . helm-mini)
+	   ("C-h a" . helm-apropos)
+	   ("C-x C-b" . helm-buffers-list)
+	   ("C-x b" . helm-buffers-list)
+	   ("M-y" . helm-show-kill-ring)
+	   ("M-x" . helm-M-x)
+	   ("C-x C-f" . helm-find-files)
+	   ("C-x c o" . helm-occur)
+	   ("C-x c y" . helm-yas-complete)
+	   ("C-x c Y" . helm-yas-create-snippet-on-region)
+	   ("C-x c SPC" . helm-all-mark-rings)))
+  (use-package helm-swoop
+   :ensure t
+   :bind (("C-s" . helm-swoop)))
+
+ '(helm-boring-buffer-regexp-list
+   (quote
+    ("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*scratch" "\\`\\*Messages" "magit" "\\`\\*Flycheck" "TAGS")))
+
+  (ido-mode -1) ;; Turn off ido mode in case I enabled it accidentally
+
+  (setq helm-boring-buffer-regexp-list (list (rx "*org") (rx "*helm") (rx "*Echo Area") (rx "*Minibuf") (rx "*scratch") (rx "*Messages") (rx "*Flycheck") (rx "*")))
+
+
+  (set-face-attribute 'helm-selection nil
+                    :background "#3e4446"
+                    :foreground "nil")
+
+#+END_SRC
+* Mode line format
+
+Display a more compact mode line
+
+#+BEGIN_SRC emacs-lisp
+(use-package smart-mode-line
+ :ensure t
+ :init (smart-mode-line-enable))
+#+END_SRC
+
+* Minibuffer editing - more space!
+
+    Sometimes you want to be able to do fancy things with the text
+    that you're entering into the minibuffer. Sometimes you just want
+    to be able to read it, especially when it comes to lots of text.
+    This binds =C-M-e= in a minibuffer) so that you can edit the
+    contents of the minibuffer before submitting it.
+
+#+BEGIN_SRC emacs-lisp
+(use-package miniedit
+  :ensure t
+* Help - guide-key
+
+It's hard to remember keyboard shortcuts. The =guide-key= package pops up help after a short delay.
+
+#+BEGIN_SRC emacs-lisp
+(use-package guide-key
+  :ensure t
+  :diminish guide-key-mode
+  :config
+  (progn
+  (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+  (guide-key-mode 1)))  ; Enable guide-key-mode
+#+END_SRC
+* Rainbow modes
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package rainbow-delimiters
+ :ensure t
+ :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+#+END_SRC
+
+* Electric Operator
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package electric-operator
+ :ensure t
+ :config (add-hook 'prog-mode-hook #'electric-operator-mode))
+
+#+END_SRC
+* Auto save files
+
+#+BEGIN_SRC  emacs-lisp
+;; auto save often
+;; save every 20 characters typed (this is the minimum)
+(setq auto-save-interval 20)
+#+END_SRC
+* UTF-8
+#+BEGIN_SRC emacs-lisp
+  (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+  (set-language-environment 'utf-8)
+  (set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-selection-coding-system
+    (if (eq system-type 'windows-nt)
+        'utf-16-le  ;; https://rufflewind.com/2014-07-20/pasting-unicode-in-emacs-on-windows
+      'utf-8))
+  (prefer-coding-system 'utf-8)
+#+END_SRC
+* Markdown Mode
+#+BEGIN_SRC emacs-lisp
+
+  (use-package markdown-mode
+    :ensure t)
+
+#+END_SRC
+* Hugo
+#+BEGIN_SRC emacs-lisp
+(use-package ox-hugo
+    :ensure t          ;Auto-install the package from Melpa (optional)
+    :after ox)
+#+END_SRC
+* Remove trailing whitespaces
+#+BEGIN_SRC emacs-lisp
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+* Multi Cursor
+#+BEGIN_SRC emacs-lisp
+
+(use-package multiple-cursors
+    :ensure t)
+
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+#+END_SRC
+
+* Wrap Text
+
+#+BEGIN_SRC emacs-lisp
+(global-visual-line-mode t)
+#+END_SRC
+* Org Capture
+
+#+BEGIN_SRC emacs-lisp
+
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (setq org-default-notes-file "~/Dropbox/org-notebooks/capture.org")
+  (setq org-directory "~/Dropbox/org-notebooks")
+
+  ;; Setting org capture templates
+  ;; (setq org-capture-templates
+  ;;     '(("p" "Prompt us for input" entry
+  ;;         (file+headline "demo.org" "Our first heading")
+  ;; 	"* %^{Please write here} %?")
+
+  ;;       ("d" "Demo Template" entry
+  ;;         (file+headline "demo.org" "Our first heading")
+  ;; 	"* Demo Text %?")
+
+  ;;       ("o" "Option in prompt" entry
+  ;;         (file+headline "demo.org" "Our first heading")
+  ;; 	"* %^{Select your option|ONE|TWO|THREE}\n SCHEDULED: %^t\n Some more text %?")
+
+  ;;       ;; Nested template
+  ;;       ("a" "A random template")
+
+  ;;       ("at" "Submenu option T" entry
+  ;; 	  (file+headline "demo.org" "Our first heading")
+  ;; 	  "* Demo Text %?")
+
+  ;;       ("aa" "Submenu option a" entry
+  ;; 	  (file+headline "demo.org" "Our first heading")
+  ;; 	  "* Demo Text %?")))
+
+ (setq org-capture-templates
+     '(
+	("t" "Task" entry
+	    (file "tasks.org")
+	  "* %^\n SCHEDULED: %^t\n Details %?")
+	  ))
+
+
+  (global-set-key (kbd "C-c b") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/hugo_blog_template.org")))
+  (global-set-key (kbd "C-c d") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/")))
+  (global-set-key (kbd "C-c o p") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/projects.org")))
+  (global-set-key (kbd "C-c o t") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/tasks.org")))
+  (global-set-key (kbd "C-c o m") (lambda() (interactive)(find-file "~/Dropbox/org-notebooks/misc.org")))
+
+
+  (setq org-todo-keywords
+  '((sequence "TODO"
+      "STARTED"
+      "|"
+      "DONE"
+      "CANCELLED")))
+
+
+
+  (setq org-todo-keyword-faces
+    '(("PROJ" :background "blue" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("TODO" :background "firebrick2" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("NEXT" :background "DarkOrchid1" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("STARTED" :background "goldenrod3" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+    ;;  ("WAITING" :background "yellow" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("QUERY" :background "cyan1" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("DEFERRED" :background "gold" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("DELEGATED" :background "gold" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("MAYBE" :background "gray" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("APPT" :background "red1" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("DONE" :background "medium sea green" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("CANCELLED" :background "lime green" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("ANALYSIS_COMPLETED" :background "light sky blue" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("IN_DEVELOPMENT" :background "firebrick2" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("NEXT" :background "DarkOrchid1" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("CODE_REVIEW" :background "goldenrod3" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("DEVELOPMENT_DONE" :background "medium sea green" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))
+      ("CANCELLED" :background "gray" :foreground "black" :width semi-expanded :weight light :box (:line-width 2 :style released-button))))
+
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%d %b %Y %a>" . "<%d %b %Y %a %H:%M>"))
+#+END_SRC
+* Org Agenda
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-files (directory-files-recursively "~/Dropbox/org-notebooks" "\\.org$"))
+#+END_SRC
+* Window
+#+BEGIN_SRC emacs-lisp
+
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+
+#+END_SRC
+* Org Images
+
+#+BEGIN_SRC emacs-lisp
+
+(use-package org-download
+    :ensure t
+    :config (add-hook 'dired-mode-hook 'org-download-enable))
+
 #+END_SRC

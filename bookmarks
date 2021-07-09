@@ -2,9 +2,9 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-refile-last-stored"
- (filename . "~/org/tasks.org")
- (front-context-string . "** DONE Complete")
- (rear-context-string . "020-02-19 Wed>\n\n")
- (position . 143))
+(("org-capture-last-stored"
+ (filename . "~/Dropbox/org-notebooks/tasks.org")
+ (front-context-string . "* Complete React")
+ (rear-context-string . "2020-10-12 Mon>\n")
+ (position . 156))
 )
